@@ -18,7 +18,7 @@ AzurePriceTracker is an ASP.NET Core MVC application that tracks Azure retail pr
 - SQL Server (or any EF Core supported database)
 - w2ui for responsive grid UI
 - HttpClient for REST API calls
-- C# 10, .NET 6
+- C#, .NET 6
 
 ## Getting Started
 
@@ -36,9 +36,9 @@ AzurePriceTracker is an ASP.NET Core MVC application that tracks Azure retail pr
    cd AzurePriceTracker
 2. Configure your database connection string in appsettings.json:
 
-"ConnectionStrings": {
-  "DefaultConnection": "Server=YOUR_SERVER;Database=AzurePriceDb;Trusted_Connection=True;"
-}
+   "ConnectionStrings": {
+     "DefaultConnection": "Server=YOUR_SERVER;Database=AzurePriceDb;Trusted_Connection=True;"
+   }
 
 3. Apply EF Core migrations: dotnet ef database update
 
