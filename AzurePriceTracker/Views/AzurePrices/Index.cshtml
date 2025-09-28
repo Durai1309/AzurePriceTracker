@@ -1,0 +1,42 @@
+﻿@model List<ServiceGroup>
+
+<link rel="stylesheet" type="text/css" href="https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.min.css">
+
+<div class="container mt-4">
+    <div id="grid" style="width: 100%; height: 500px;"></div>
+</div>
+
+<script type="module">
+    import { w2grid } from 'https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.es6.min.js';
+
+    let grid = new w2grid({
+        name: 'serviceGroupsGrid',
+        box: '#grid',
+        show: {
+            toolbar: true,
+            footer: true,
+            lineNumbers: true,
+            toolbarSearch: true,
+            toolbarReload: true
+        },
+        columns: [
+            { field: 'ServiceFamily', text: 'Service Family', size: '30%' },
+            { field: 'ServiceName', text: 'Service Name', size: '30%' },
+            { field: 'ProductCount', text: 'Products', size: '100px', render: 'int' },
+            {
+                field: 'Actions', text: 'Actions', size: '120px', render(record) {
+                    return `<a href="/AzurePrices/Details?serviceFamily=${encodeURIComponent(record.ServiceFamily)}&serviceName=${encodeURIComponent(record.ServiceName)}" class="w2ui-btn w2ui-btn-blue">View</a>`;
+                }
+            }
+        ],
+        records: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+        Model.Select((g, i) => new
+        {
+            recid = i + 1,
+            g.ServiceFamily,
+            g.ServiceName,
+            g.ProductCount
+        })
+        ))
+        });
+</script>
